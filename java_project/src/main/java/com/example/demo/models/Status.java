@@ -21,5 +21,31 @@ public class Status {
     @OneToMany(mappedBy = "status")
     private Set<StatusTask> statusTasks;
 
+    public long getRowId() {
+        return rowId;
+    }
 
+    public void setRowId(long rowId) {
+        this.rowId = rowId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<StatusTask> getStatusTasks() {
+        return statusTasks;
+    }
+
+    public void setStatusTasks(Set<StatusTask> statusTasks) {
+        this.statusTasks = statusTasks;
+    }
+
+    public Status(String name) {
+        this.name = name;
+    }
 }
