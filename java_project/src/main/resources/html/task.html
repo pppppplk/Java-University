@@ -4,6 +4,15 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+
+        button{
+            background-color: crimson;
+            width: 10%;
+            padding: 15px 20px;
+            margin: 20px 0;
+            color: white;
+        }
+
         .accordion {
             background-color: #eee;
             color: #444;
@@ -16,11 +25,6 @@
             font-size: 15px;
             transition: 0.4s;
         }
-
-        .active, .accordion:hover {
-            background-color: #ccc;
-        }
-
         .panel {
             padding: 0 18px;
             display: none;
@@ -33,7 +37,7 @@
 
 <h2>Tasks</h2>
 
-<button class="accordion">Task 1</button>
+<button class="accordion" id="task1" >Task 1</button>
 <div class="panel">
     <p>Info about task.</p>
 </div>
@@ -48,21 +52,12 @@
     <p>Info about task.</p>
 </div>
 
-<script>
-    var acc = document.getElementsByClassName("accordion");
-    var i;
+<button  id="createTask" >Create Task</button>
+<div class="panel">
+</div>
 
-    for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var panel = this.nextElementSibling;
-            if (panel.style.display === "block") {
-                panel.style.display = "none";
-            } else {
-                panel.style.display = "block";
-            }
-        });
-    }
+<script  src="https://code.jquery.com/jquery-3.6.0.min.js"   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="   crossorigin="anonymous"></script>
+<script type="text/javascript" src="../js/task.js">
 </script>
 
 </body>

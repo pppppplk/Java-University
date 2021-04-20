@@ -1,5 +1,6 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,7 +10,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "S_STATUS")
-@NoArgsConstructor
+//@NoArgsConstructor
 public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +19,15 @@ public class Status {
     @Column(nullable = false)
     private String name;
 
+
+    @JsonIgnore
     @OneToMany(mappedBy = "status")
     private Set<StatusTask> statusTasks;
+
+
+    public Status() {}
+
+
 
     public long getRowId() {
         return rowId;
@@ -47,5 +55,14 @@ public class Status {
 
     public Status(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Status{" +
+                "rowId=" + rowId +
+                ", name='" + name + '\'' +
+                ", statusTasks=" + statusTasks +
+                '}';
     }
 }

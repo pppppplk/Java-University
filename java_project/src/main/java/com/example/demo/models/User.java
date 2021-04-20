@@ -1,5 +1,6 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,7 +10,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "S_USERS")
-@NoArgsConstructor
+//@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,18 +26,24 @@ public class User {
     @Column(nullable = false)
     private String passwordHash;
 
+
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<Role> roles;
 
+
+    @JsonIgnore
     @OneToMany(mappedBy = "developer")
     private Set<Task> developerTask;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "analyst")
     private Set<Task> analystTask;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "tester")
     private Set<Task> testerTask;
 
@@ -46,6 +53,10 @@ public class User {
         this.middleName = middleName;
         this.passwordHash = passwordHash;
         this.login = login;
+    }
+
+    public User() {
+
     }
 
     public long getRowId() {
@@ -126,5 +137,21 @@ public class User {
 
     public void setTesterTask(Set<Task> testerTask) {
         this.testerTask = testerTask;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "rowId=" + rowId +
+                ", login='" + login + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
+                ", roles=" + roles +
+                ", developerTask=" + developerTask +
+                ", analystTask=" + analystTask +
+                ", testerTask=" + testerTask +
+                '}';
     }
 }

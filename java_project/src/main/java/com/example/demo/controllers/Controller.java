@@ -1,13 +1,12 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.Role;
-import com.example.demo.models.Status;
-import com.example.demo.models.StatusTask;
-import com.example.demo.models.User;
+import com.example.demo.models.*;
 import com.example.demo.repo.*;
 import org.json.JSONException;
 import org.springframework.web.bind.annotation.*;
 import org.json.JSONObject;
+
+import java.util.List;
 
 
 @RestController
@@ -39,6 +38,17 @@ public class Controller {
         User user = new User(firstName, lastName, middleName, passwordHash, login);
         return this.userRepo.save(user);
     }
+
+    @CrossOrigin(origins = "http://localhost:63342")
+    @PostMapping("/tasks")
+    Task createTask(@RequestParam String title, @RequestParam String body){
+        Task task = new Task(title, body);
+        return  this.taskRepo.save(task);
+    }
+
+
+
+
 
     @PostMapping("/roles")
     Role createRole(@RequestParam String name){
@@ -74,6 +84,14 @@ public class Controller {
 
         return this.roleRepo.findRoleByName(name);
     }
+
+    @CrossOrigin(origins = "http://localhost:63342")
+    @GetMapping("/task/all")
+    List<Task> getTask() {
+        return this.taskRepo.findAll();
+    }
+
+
 
     @DeleteMapping("/deleteUsers")
     User deleteUser(@RequestParam Long id){

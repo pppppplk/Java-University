@@ -1,5 +1,6 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,7 +11,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "S_ROLE")
-@NoArgsConstructor
+//@NoArgsConstructor
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,12 +19,17 @@ public class Role {
 
     private String name;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
     private Set<User> users;
 
 
     public Role(String name) {
         this.name = name;
+    }
+
+    public Role() {
+
     }
 
     public long getRowId() {
@@ -48,5 +54,14 @@ public class Role {
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "rowId=" + rowId +
+                ", name='" + name + '\'' +
+                ", users=" + users +
+                '}';
     }
 }
