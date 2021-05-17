@@ -39,10 +39,9 @@ public class Controller {
         return this.userRepo.save(user);
     }
 
-    @CrossOrigin(origins = "http://localhost:63342")
+    //@CrossOrigin(origins = "http://localhost:63342")
     @PostMapping("/tasks")
-    Task createTask(@RequestParam String title, @RequestParam String body){
-        Task task = new Task(title, body);
+    Task createTask(@RequestBody Task task){
         return  this.taskRepo.save(task);
     }
 
@@ -90,6 +89,14 @@ public class Controller {
     List<Task> getTask() {
         return this.taskRepo.findAll();
     }
+
+    @CrossOrigin(origins = "http://localhost:63342")
+    @GetMapping("/task/{id}")
+    Task getTask(@PathVariable Long rowId){
+        return this.taskRepo.findTaskByRowId(rowId);
+    }
+
+
 
 
 
